@@ -13,7 +13,7 @@ export function HeroSection({ locale }: { locale: string }) {
   const t = useTranslations('hero')
 
   return (
-    <section className="relative min-h-[600px] md:h-screen md:min-h-[700px] flex items-end overflow-hidden bg-bg-primary">
+    <section className="relative h-[70vh] min-h-[480px] max-h-[680px] flex items-end overflow-hidden bg-bg-primary">
 
       {/* Video achtergrond */}
       <video
