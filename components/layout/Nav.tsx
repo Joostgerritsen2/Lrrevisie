@@ -4,18 +4,25 @@ import Image from 'next/image'
 import { ShoppingCart } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import { NavSearch } from './NavSearch'
 import { useCartStore } from '@/lib/cart'
 
 interface NavProps {
   locale: string
-  transparent?: boolean
 }
 
-export function Nav({ locale, transparent = false }: NavProps) {
+export function Nav({ locale }: NavProps) {
   const t = useTranslations('nav')
   const itemCount = useCartStore(s => s.items.reduce((n, i) => n + i.quantity, 0))
   const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   function switchLocalePath(targetLocale: string) {
     const segments = pathname.split('/')
@@ -27,11 +34,11 @@ export function Nav({ locale, transparent = false }: NavProps) {
     <nav
       className={`
         fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-16 px-10
-        border-b border-white/5
-        ${transparent
-          ? 'bg-gradient-to-b from-black/70 to-transparent border-transparent'
-          : 'bg-bg-primary/95 backdrop-blur-sm'}
         transition-all duration-300
+        ${scrolled
+          ? 'bg-bg-primary/97 backdrop-blur-sm border-b border-white/5 shadow-lg shadow-black/20'
+          : 'bg-gradient-to-b from-black/60 to-transparent border-transparent'
+        }
       `}
     >
       {/* Logo */}
