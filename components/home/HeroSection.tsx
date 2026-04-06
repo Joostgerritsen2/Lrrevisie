@@ -44,8 +44,8 @@ export function HeroSection({ locale }: { locale: string }) {
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-5 md:mb-6">
           <div className="w-6 md:w-10 h-[2px] bg-brand-accent" />
-          <span className="text-[10px] md:text-[11px] font-bold tracking-[4px] uppercase text-brand-accent">
-            {t('eyebrow')}
+          <span className="text-[10px] md:text-[11px] font-bold tracking-[4px] uppercase text-brand-accent/70">
+            Land Rover & Range Rover Specialist
           </span>
         </div>
 
