@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ChevronRight, Package, Wrench, CheckCircle2, ArrowRight, Phone, Clock, ShieldCheck, Truck, Star } from 'lucide-react'
+import { Package, Wrench, CheckCircle2, ArrowRight, Phone, Clock, ShieldCheck, Truck, Star } from 'lucide-react'
+import { PageVideoHero } from '@/components/layout/PageVideoHero'
 
 interface PageProps { params: Promise<{ locale: string }> }
 
@@ -28,41 +29,31 @@ export default async function RevisieServicePage({ params }: PageProps) {
   const { locale } = await params
 
   return (
-    <div className="min-h-screen pt-16 bg-bg-primary">
-      {/* Header */}
-      <div className="relative bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-14 md:py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-5 bg-[repeating-linear-gradient(45deg,#00A652,#00A652_1px,transparent_1px,transparent_40px)]" />
-        <div className="max-w-5xl mx-auto relative">
-          <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-4">
-            <Link href={`/${locale}`} className="hover:text-white transition-colors">Home</Link>
-            <ChevronRight size={11} className="text-white/20" />
-            <span className="text-brand-accent">Revisie Service</span>
-          </div>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-0.5 bg-brand-accent" />
-            <span className="text-[11px] font-bold tracking-[3px] uppercase text-brand-accent">30+ jaar ervaring</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-[-1.5px] leading-tight mb-4">
-            Stuur uw bak in<br />voor revisie
-          </h1>
-          <p className="text-text-muted text-base max-w-xl leading-relaxed mb-8">
-            Vakkundige revisie van versnellingsbakken, tussenbakken, differentielen en stuurhuizen voor alle Land Rover en Range Rover modellen.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link href={`/${locale}/contact`}
-              className="flex items-center gap-2 bg-brand-accent px-6 py-3.5 text-sm font-bold text-bg-primary hover:bg-brand-accent/90 transition-colors">
-              <Phone size={14} /> Bel voor een afspraak
-            </Link>
-            <Link href={`/${locale}/offerte`}
-              className="flex items-center gap-2 bg-bg-primary/50 border border-brand-accent/40 px-6 py-3.5 text-sm font-bold hover:border-brand-accent transition-colors">
-              Offerte aanvragen <ArrowRight size={14} />
-            </Link>
-          </div>
+    <div className="min-h-screen bg-bg-primary">
+      <PageVideoHero
+        eyebrow="30+ jaar ervaring"
+        title={`Stuur uw bak in\nvoor revisie`}
+        subtitle="Vakkundige revisie van versnellingsbakken, tussenbakken, differentielen en stuurhuizen voor alle Land Rover en Range Rover modellen."
+        breadcrumbs={[
+          { label: 'Home', href: `/${locale}` },
+          { label: 'Revisie Service' },
+        ]}
+        height="lg"
+      >
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link href={`/${locale}/contact`}
+            className="flex items-center gap-2 bg-brand-accent px-6 py-3.5 text-sm font-bold text-bg-primary hover:bg-brand-accent/90 transition-colors">
+            <Phone size={14} /> Bel voor een afspraak
+          </Link>
+          <Link href={`/${locale}/offerte`}
+            className="flex items-center gap-2 bg-bg-primary/50 border border-brand-accent/40 px-6 py-3.5 text-sm font-bold hover:border-brand-accent transition-colors">
+            Offerte aanvragen <ArrowRight size={14} />
+          </Link>
         </div>
-      </div>
+      </PageVideoHero>
 
       {/* USP balk */}
-      <div className="border-b border-brand-primary/20 bg-bg-card px-5 md:px-10 py-5">
+      <div className="border-b border-white/5 bg-bg-grey px-5 md:px-10 py-5">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 md:gap-10">
           {[
             { icon: Star,         text: '30+ jaar specialistische kennis' },
@@ -96,7 +87,7 @@ export default async function RevisieServicePage({ params }: PageProps) {
               {STEPS.map(step => {
                 const Icon = step.icon
                 return (
-                  <div key={step.num} className="flex gap-5 p-5 bg-bg-card border border-brand-primary/20 hover:border-brand-accent/30 transition-colors group">
+                  <div key={step.num} className="flex gap-5 p-5 bg-bg-grey-card border border-white/6 hover:border-brand-accent/30 transition-colors group">
                     <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-brand-primary/30 border border-brand-accent/20 group-hover:border-brand-accent/50 transition-colors">
                       <Icon size={16} className="text-brand-accent" />
                     </div>

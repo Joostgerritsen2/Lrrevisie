@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       { hostname: 'cdn.sanity.io' },
       { hostname: 'lr-revisie.nl' },
       { hostname: 'assets.mixkit.co' },
+      { hostname: 'cdn.coverr.co' },
     ],
   },
   async redirects() {

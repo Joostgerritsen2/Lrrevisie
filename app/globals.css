@@ -4,10 +4,14 @@
 @theme {
   /* Achtergronden */
   --color-bg-primary:    #030A05;
-  --color-bg-card:       #060F08;
-  --color-bg-elevated:   #091409;
+  --color-bg-card:       #0A0F0B;
+  --color-bg-elevated:   #0F1410;
   --color-bg-green:      #003D1F;
   --color-bg-deep-green: #002B16;
+
+  /* Grijs — neutrale donkere charcoal voor afwisseling */
+  --color-bg-grey:      #0E1012;
+  --color-bg-grey-card: #161A1C;
 
   /* Brand kleuren */
   --color-brand-primary: #005B2F;

@@ -27,8 +27,14 @@ export default async function HomePage({ params }: PageProps) {
       <UspBar />
 
       {/* ─── Categorieën ───────────────────────────────────────────── */}
-      <section className="bg-bg-primary py-16 md:py-24 px-5 md:px-10 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative bg-bg-grey py-16 md:py-24 px-5 md:px-10 overflow-hidden">
+        {/* Decoratief parallax achtergrond element */}
+        <Parallax speed={0.25} className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-brand-accent/[0.03] blur-[80px]" style={{ borderRadius: '50%' }} />
+          <div className="absolute bottom-[-20%] left-[-5%] w-[400px] h-[400px] bg-brand-primary/[0.12] blur-[60px]" style={{ borderRadius: '50%' }} />
+        </Parallax>
+
+        <div className="max-w-7xl mx-auto relative">
           <div className="flex items-end justify-between mb-8 md:mb-10">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -43,7 +49,6 @@ export default async function HomePage({ params }: PageProps) {
             </Link>
           </div>
 
-          <Parallax speed={0.05}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5">
             {categories.map((cat: {
               _id: string; naam: string; naamEn?: string; slug: string
@@ -63,13 +68,12 @@ export default async function HomePage({ params }: PageProps) {
               />
             ))}
           </div>
-          </Parallax>
         </div>
       </section>
 
       {/* ─── Uitgelichte producten ─────────────────────────────────── */}
       {featured.length > 0 && (
-        <section className="bg-bg-card border-t border-brand-primary/20 py-16 md:py-24 px-5 md:px-10">
+        <section className="bg-bg-primary border-t border-white/5 py-16 md:py-24 px-5 md:px-10">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-8 md:mb-10">
               <div>

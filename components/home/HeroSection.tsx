@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { useEffect, useRef } from 'react'
 
-// Mixkit CC0 video — draaiende metalen tandwielen, past perfect bij een gearbox specialist
-const VIDEO_URL = 'https://assets.mixkit.co/videos/32653/32653-720.mp4'
-// Fallback poster: een LR Revisie product foto
-const POSTER_URL = 'https://lr-revisie.nl/wp-content/uploads/2022/09/2117686472-scaled.jpg'
+// Coverr.co (gratis commercieel gebruik) — klassieke Land Rover Defender 90, donkerblauw
+const VIDEO_URL   = 'https://cdn.coverr.co/videos/coverr-couple-getting-out-of-a-land-rover-5064/1080p.mp4'
+const VIDEO_URL_2 = 'https://cdn.coverr.co/videos/coverr-parked-land-rover-on-a-beach-1734/1080p.mp4'
+const POSTER_URL  = 'https://cdn.coverr.co/videos/coverr-couple-getting-out-of-a-land-rover-5064/thumbnail?width=1280'
 
 export function HeroSection({ locale }: { locale: string }) {
   const t = useTranslations('hero')
@@ -41,16 +41,19 @@ export function HeroSection({ locale }: { locale: string }) {
         loop
         playsInline
         poster={POSTER_URL}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: 'brightness(0.28) saturate(0.55) contrast(1.1)', willChange: 'transform' }}
+        className="absolute inset-0 w-full h-full object-cover scale-105"
+        style={{ filter: 'brightness(0.5) saturate(0.9) contrast(1.1)', willChange: 'transform' }}
       >
         <source src={VIDEO_URL} type="video/mp4" />
-        {/* Fallback: toon poster */}
+        <source src={VIDEO_URL_2} type="video/mp4" />
       </video>
 
-      {/* Gelaagde gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/60 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/75 via-bg-primary/20 to-transparent pointer-events-none" />
+      {/* Subtiele groene brand-tint */}
+      <div className="absolute inset-0 bg-brand-primary/15 mix-blend-multiply pointer-events-none" />
+
+      {/* Gradient onderaan: tekst leesbaar, bovenkant open zodat video zichtbaar blijft */}
+      <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/45 to-bg-primary/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/75 via-transparent to-transparent pointer-events-none" />
 
       {/* Verticale accentlijn links */}
       <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-brand-accent z-10" />

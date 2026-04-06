@@ -3,6 +3,7 @@ import { sanityClient } from '@/lib/sanity/client'
 import { SETTINGS_QUERY } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/image'
 import { CheckCircle } from 'lucide-react'
+import { PageVideoHero } from '@/components/layout/PageVideoHero'
 
 interface PageProps {
   params: Promise<{ locale: string }>
@@ -27,19 +28,17 @@ export default async function OverOnsPage({ params }: PageProps) {
   const settings = await sanityClient.fetch(SETTINGS_QUERY)
 
   return (
-    <div className="min-h-screen pt-16">
-      {/* Header */}
-      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-xs text-brand-accent tracking-[2px] uppercase mb-2">
-            <a href={`/${locale}`} className="hover:text-white transition-colors">Home</a>
-            <span className="mx-1.5">/</span>
-            Over ons
-          </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-1px]">Over LR Revisie</h1>
-          <p className="text-text-muted mt-2">Uw specialist in Land Rover revisie-onderdelen</p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-bg-primary">
+      <PageVideoHero
+        eyebrow="Opgericht 1993"
+        title="Over LR Revisie"
+        subtitle="30+ jaar specialist in revisie van Land Rover en Range Rover versnellingsbakken, tussenbakken en differentielen."
+        breadcrumbs={[
+          { label: 'Home', href: `/${locale}` },
+          { label: 'Over ons' },
+        ]}
+        height="md"
+      />
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-14 md:py-20">
