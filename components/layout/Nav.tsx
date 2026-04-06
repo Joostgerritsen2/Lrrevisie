@@ -43,7 +43,7 @@ export function Nav({ locale }: { locale: string }) {
           width={140}
           height={43}
           className="h-9 w-auto object-contain transition-all duration-200"
-          style={{ filter: 'brightness(1.6) saturate(4)' }}
+          style={{ filter: 'brightness(1.1) saturate(1.2)' }}
           priority
         />
       </Link>

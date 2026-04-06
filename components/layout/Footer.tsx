@@ -26,7 +26,7 @@ export async function Footer({ locale }: { locale: string }) {
               width={120}
               height={37}
               className="h-8 w-auto object-contain mb-5"
-              style={{ filter: 'brightness(2) saturate(0.9) opacity(0.65)' }}
+              style={{ opacity: 0.55 }}
             />
             <p className="text-sm text-text-subtle leading-relaxed max-w-[240px]">{t('tagline')}</p>
           </div>
