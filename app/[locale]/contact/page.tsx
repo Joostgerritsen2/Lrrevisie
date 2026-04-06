@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
-import { PageVideoHero } from '@/components/layout/PageVideoHero'
 
 interface PageProps {
   params: Promise<{ locale: string }>
@@ -16,16 +15,21 @@ export default async function ContactPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-bg-primary">
-      <PageVideoHero
-        eyebrow="Land Rover Specialist"
-        title="Contact opnemen"
-        subtitle="Stel uw vraag — we helpen u graag persoonlijk verder."
-        breadcrumbs={[
-          { label: 'Home', href: `/${locale}` },
-          { label: 'Contact' },
-        ]}
-        height="md"
-      />
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 pt-28 pb-10 md:pt-32 md:pb-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-4 flex-wrap">
+            <a href={`/${locale}`} className="hover:text-white transition-colors">Home</a>
+            <span className="text-white/20 mx-1">›</span>
+            <span className="text-brand-accent">Contact</span>
+          </div>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-5 h-0.5 bg-brand-accent" />
+            <span className="text-[10px] font-bold tracking-[3px] uppercase text-brand-accent">Land Rover Specialist</span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-[-1.5px] leading-tight text-white mb-3">Contact opnemen</h1>
+          <p className="text-sm md:text-base text-text-muted max-w-xl leading-relaxed">Stel uw vraag — we helpen u graag persoonlijk verder.</p>
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-14 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">

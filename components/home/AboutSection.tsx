@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity/image'
+import { Parallax } from '@/components/ui/Parallax'
 import type { SanityImageSource } from '@sanity/image-url'
 
 interface AboutSectionProps {
@@ -40,8 +41,8 @@ export function AboutSection({ eigenaarNaam, eigenaarBio, eigenaarFoto }: AboutS
           </div>
         </div>
 
-        {/* Eigenaarsfoto + werkplaatsfotos */}
-        <div className="grid grid-cols-2 gap-1">
+        {/* Eigenaarsfoto + werkplaatsfotos — Parallax: foto's scrollen iets langzamer */}
+        <Parallax speed={0.08} className="grid grid-cols-2 gap-1">
           {eigenaarFoto && (
             <div className="col-span-2 relative aspect-[16/7] overflow-hidden bg-bg-card">
               <Image
@@ -64,7 +65,7 @@ export function AboutSection({ eigenaarNaam, eigenaarBio, eigenaarFoto }: AboutS
           <div className="relative aspect-square overflow-hidden bg-bg-card">
             <Image src="https://lr-revisie.nl/wp-content/uploads/2023/01/RTC2914-scaled.jpg" alt="Onderdeel" fill className="object-cover saturate-75" />
           </div>
-        </div>
+        </Parallax>
       </div>
     </section>
   )

@@ -17,10 +17,17 @@ export default async function ZoekenPage({ params, searchParams }: PageProps) {
     : []
 
   return (
-    <div className="min-h-screen pt-16">
-      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-12">
+    <div className="min-h-screen bg-bg-primary">
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 pt-28 pb-10 md:pt-32 md:pb-12">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-extrabold tracking-[-1px] mb-6">Zoeken</h1>
+          <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-4">
+            <a href={`/${locale}`} className="hover:text-white transition-colors">Home</a>
+            <span className="text-white/20 mx-1">›</span>
+            <span className="text-brand-accent">Zoeken</span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-[-1.5px] leading-tight mb-6">
+            {q ? `Resultaten voor "${q}"` : 'Zoeken'}
+          </h1>
           <form method="get" className="flex max-w-xl border-2 border-brand-accent/50">
             <input
               name="q"
@@ -37,7 +44,7 @@ export default async function ZoekenPage({ params, searchParams }: PageProps) {
       </div>
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-8 md:py-10">
-        {q && <p className="text-text-muted text-sm mb-6">{results.length} resultaten voor &quot;{q}&quot;</p>}
+        {q && results.length > 0 && <p className="text-text-muted text-sm mb-6">{results.length} resultaten</p>}
         {results.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-0.5">
             {results.map((product: { _id: string; naam: string; naamEn?: string; artikelnummer: string; slug: string; categorie: { naam: string; slug: string }; prijs: number; inVoorraad: boolean; afbeelding?: unknown }) => (

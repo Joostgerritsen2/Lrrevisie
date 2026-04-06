@@ -48,17 +48,21 @@ export default async function FaqPage({ params }: PageProps) {
   const { locale } = await params
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen bg-bg-primary">
       {/* Header */}
-      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-12">
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 pt-28 pb-10 md:pt-32 md:pb-12">
         <div className="max-w-7xl mx-auto">
-          <div className="text-xs text-brand-accent tracking-[2px] uppercase mb-2">
+          <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-4 flex-wrap">
             <a href={`/${locale}`} className="hover:text-white transition-colors">Home</a>
-            <span className="mx-1.5">/</span>
-            FAQ
+            <span className="text-white/20 mx-1">›</span>
+            <span className="text-brand-accent">FAQ</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-1px]">Veelgestelde vragen</h1>
-          <p className="text-text-muted mt-2">Antwoorden op de meest gestelde vragen</p>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-5 h-0.5 bg-brand-accent" />
+            <span className="text-[10px] font-bold tracking-[3px] uppercase text-brand-accent">Klantenservice</span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-[-1.5px] leading-tight text-white mb-3">Veelgestelde vragen</h1>
+          <p className="text-sm md:text-base text-text-muted max-w-xl leading-relaxed">Antwoorden op de meest gestelde vragen over bestellen, verzending, retour en revisie.</p>
         </div>
       </div>
 

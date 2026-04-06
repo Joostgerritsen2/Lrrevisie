@@ -12,16 +12,20 @@ export default async function OffertePage({ params }: PageProps) {
   const { locale } = await params
 
   return (
-    <div className="min-h-screen pt-16 bg-bg-primary">
-      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-14">
+    <div className="min-h-screen bg-bg-primary">
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 pt-28 pb-10 md:pt-32 md:pb-12">
         <div className="max-w-5xl mx-auto">
-          <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-3">
+          <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-4 flex-wrap">
             <Link href={`/${locale}`} className="hover:text-white transition-colors">Home</Link>
-            <ChevronRight size={11} className="text-white/20" />
+            <span className="text-white/20 mx-1">›</span>
             <span className="text-brand-accent">Offerte aanvragen</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-1px] mb-2">Offerte aanvragen</h1>
-          <p className="text-text-muted max-w-xl">Staat het onderdeel dat u zoekt niet in de winkel, of wilt u een prijs op maat? Vul het formulier in en wij nemen zo snel mogelijk contact op.</p>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-5 h-0.5 bg-brand-accent" />
+            <span className="text-[10px] font-bold tracking-[3px] uppercase text-brand-accent">Prijs op maat</span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-[-1.5px] leading-tight mb-3">Offerte aanvragen</h1>
+          <p className="text-sm md:text-base text-text-muted max-w-xl leading-relaxed">Staat het onderdeel dat u zoekt niet in de winkel, of wilt u een prijs op maat? Vul het formulier in en wij nemen zo snel mogelijk contact op.</p>
         </div>
       </div>
 

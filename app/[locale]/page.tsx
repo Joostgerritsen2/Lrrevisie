@@ -5,6 +5,7 @@ import { UspBar } from '@/components/home/UspBar'
 import { CategoryCard } from '@/components/shop/CategoryCard'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { AboutSection } from '@/components/home/AboutSection'
+import { FaqSection } from '@/components/home/FaqSection'
 import { Parallax } from '@/components/ui/Parallax'
 import Link from 'next/link'
 import { Search, ArrowRight } from 'lucide-react'
@@ -29,9 +30,9 @@ export default async function HomePage({ params }: PageProps) {
       {/* ─── Categorieën ───────────────────────────────────────────── */}
       <section className="relative bg-bg-grey py-16 md:py-24 px-5 md:px-10 overflow-hidden">
         {/* Decoratief parallax achtergrond element */}
-        <Parallax speed={0.25} className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-brand-accent/[0.03] blur-[80px]" style={{ borderRadius: '50%' }} />
-          <div className="absolute bottom-[-20%] left-[-5%] w-[400px] h-[400px] bg-brand-primary/[0.12] blur-[60px]" style={{ borderRadius: '50%' }} />
+        <Parallax speed={0.3} className="absolute inset-[-25%] pointer-events-none">
+          <div className="absolute top-[15%] right-[5%] w-[700px] h-[700px] bg-brand-accent/[0.07] blur-[100px]" style={{ borderRadius: '50%' }} />
+          <div className="absolute bottom-[10%] left-[0%] w-[500px] h-[500px] bg-brand-primary/[0.2] blur-[80px]" style={{ borderRadius: '50%' }} />
         </Parallax>
 
         <div className="max-w-7xl mx-auto relative">
@@ -145,6 +146,8 @@ export default async function HomePage({ params }: PageProps) {
           </form>
         </div>
       </section>
+
+      <FaqSection locale={locale} />
 
       <AboutSection
         eigenaarNaam={settings?.eigenaarNaam}

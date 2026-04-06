@@ -9,10 +9,10 @@ import { NavSearch } from './NavSearch'
 import { useCartStore } from '@/lib/cart'
 
 const NAV_LINKS = (locale: string, t: (k: string) => string) => [
-  { href: `/${locale}/winkel`,   label: t('shop') },
-  { href: `/${locale}/gidsen`,   label: t('guides') },
-  { href: `/${locale}/over-ons`, label: t('about') },
-  { href: `/${locale}/contact`,  label: t('contact') },
+  { href: `/${locale}/winkel`,          label: t('shop') },
+  { href: `/${locale}/revisie-service`, label: t('revision') },
+  { href: `/${locale}/gidsen`,          label: t('guides') },
+  { href: `/${locale}/contact`,         label: t('contact') },
 ]
 
 export function Nav({ locale }: { locale: string }) {

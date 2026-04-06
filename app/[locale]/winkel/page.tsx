@@ -11,15 +11,21 @@ export default async function WinkelPage({ params }: PageProps) {
   const categories = await sanityClient.fetch(CATEGORIES_QUERY)
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen bg-bg-primary">
       {/* Header */}
-      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-12">
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 pt-28 pb-10 md:pt-32 md:pb-12">
         <div className="max-w-7xl mx-auto">
-          <div className="text-xs text-brand-accent tracking-[2px] uppercase mb-2">
-            <a href={`/${locale}`} className="hover:text-white">Home</a> / Winkel
+          <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-4 flex-wrap">
+            <a href={`/${locale}`} className="hover:text-white transition-colors">Home</a>
+            <span className="text-white/20 mx-1">›</span>
+            <span className="text-brand-accent">Winkel</span>
           </div>
-          <h1 className="text-4xl font-extrabold tracking-[-1px]">Winkel</h1>
-          <p className="text-text-muted mt-2">418 onderdelen voor Land Rover en Range Rover</p>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-5 h-0.5 bg-brand-accent" />
+            <span className="text-[10px] font-bold tracking-[3px] uppercase text-brand-accent">Land Rover specialist</span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-[-1.5px] leading-tight text-white mb-3">Winkel</h1>
+          <p className="text-sm md:text-base text-text-muted max-w-xl leading-relaxed">Gereviseerde versnellingsbakken, tussenbakken, differentielen en onderdelen voor alle Land Rover en Range Rover modellen.</p>
         </div>
       </div>
 
