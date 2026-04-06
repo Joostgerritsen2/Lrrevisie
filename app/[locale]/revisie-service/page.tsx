@@ -53,7 +53,7 @@ export default async function RevisieServicePage({ params }: PageProps) {
       </PageVideoHero>
 
       {/* USP balk */}
-      <div className="border-b border-white/5 bg-bg-grey px-5 md:px-10 py-5">
+      <div className="border-b border-white/5 bg-bg-warm px-5 md:px-10 py-5">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 md:gap-10">
           {[
             { icon: Star,         text: '30+ jaar specialistische kennis' },
@@ -87,7 +87,7 @@ export default async function RevisieServicePage({ params }: PageProps) {
               {STEPS.map(step => {
                 const Icon = step.icon
                 return (
-                  <div key={step.num} className="flex gap-5 p-5 bg-bg-grey-card border border-white/6 hover:border-brand-accent/30 transition-colors group">
+                  <div key={step.num} className="flex gap-5 p-5 bg-bg-warm-card border border-white/6 hover:border-brand-accent/30 transition-colors group">
                     <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-brand-primary/30 border border-brand-accent/20 group-hover:border-brand-accent/50 transition-colors">
                       <Icon size={16} className="text-brand-accent" />
                     </div>

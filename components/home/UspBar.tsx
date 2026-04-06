@@ -12,7 +12,7 @@ export async function UspBar() {
   ]
 
   return (
-    <div className="bg-bg-green border-b border-brand-primary/30 grid grid-cols-2 lg:grid-cols-4">
+    <div className="bg-bg-warm border-b border-white/6 grid grid-cols-2 lg:grid-cols-4">
       {items.map((item, i) => (
         <div
           key={i}

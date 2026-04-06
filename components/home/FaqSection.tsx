@@ -29,7 +29,7 @@ const FAQS = [
 
 export function FaqSection({ locale }: { locale: string }) {
   return (
-    <section className="bg-bg-grey border-t border-white/5 py-16 md:py-24 px-5 md:px-10">
+    <section className="bg-bg-warm border-t border-white/6 py-16 md:py-24 px-5 md:px-10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16">
           {/* Left: header */}

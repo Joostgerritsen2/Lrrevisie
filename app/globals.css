@@ -13,6 +13,10 @@
   --color-bg-grey:      #0E1012;
   --color-bg-grey-card: #161A1C;
 
+  /* Warm — donker kaki/aarde, zoals Defender-interieur */
+  --color-bg-warm:      #161109;
+  --color-bg-warm-card: #201A10;
+
   /* Brand kleuren */
   --color-brand-primary: #005B2F;
   --color-brand-accent:  #00A652;

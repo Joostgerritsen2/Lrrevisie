@@ -74,7 +74,7 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* ─── Uitgelichte producten ─────────────────────────────────── */}
       {featured.length > 0 && (
-        <section className="bg-bg-primary border-t border-white/5 py-16 md:py-24 px-5 md:px-10">
+        <section className="bg-bg-warm border-t border-white/6 py-16 md:py-24 px-5 md:px-10">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-8 md:mb-10">
               <div>

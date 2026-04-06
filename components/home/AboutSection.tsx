@@ -11,7 +11,7 @@ interface AboutSectionProps {
 
 export function AboutSection({ eigenaarNaam, eigenaarBio, eigenaarFoto }: AboutSectionProps) {
   return (
-    <section className="bg-bg-grey py-14 md:py-20 px-5 md:px-10">
+    <section className="bg-bg-warm py-14 md:py-20 px-5 md:px-10">
       <div className={`max-w-7xl mx-auto grid grid-cols-1 gap-10 lg:gap-20 items-center ${eigenaarFoto ? 'lg:grid-cols-2' : 'max-w-3xl'}`}>
         {/* Tekst + stats */}
         <div>
