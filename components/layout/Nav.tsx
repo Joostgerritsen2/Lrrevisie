@@ -38,7 +38,7 @@ export function Nav({ locale }: { locale: string }) {
       {/* Logo — transparante PNG, donkergroen → helder via filter */}
       <Link href={`/${locale}`} className="group flex-shrink-0">
         <Image
-          src="/logo.png"
+          src="/lr-logo.png"
           alt="LR Revisie"
           width={140}
           height={43}

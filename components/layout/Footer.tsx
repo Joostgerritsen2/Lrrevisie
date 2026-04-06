@@ -21,7 +21,7 @@ export async function Footer({ locale }: { locale: string }) {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Image
-              src="/logo.png"
+              src="/lr-logo.png"
               alt="LR Revisie"
               width={120}
               height={37}
