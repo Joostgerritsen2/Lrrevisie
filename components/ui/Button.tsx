@@ -1,3 +1,4 @@
+import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/lib/utils'
 import type { ButtonHTMLAttributes } from 'react'
 
@@ -6,6 +7,7 @@ type Variant = 'primary' | 'ghost' | 'outline'
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant
   size?: 'sm' | 'md' | 'lg'
+  asChild?: boolean
 }
 
 const variants: Record<Variant, string> = {
@@ -20,9 +22,10 @@ const sizes = {
   lg:  'px-8 py-4 text-sm',
 }
 
-export function Button({ variant = 'primary', size = 'md', className, children, ...props }: ButtonProps) {
+export function Button({ variant = 'primary', size = 'md', className, children, asChild, ...props }: ButtonProps) {
+  const Comp = asChild ? Slot : 'button'
   return (
-    <button
+    <Comp
       className={cn(
         'inline-flex items-center gap-2 transition-colors duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed',
         variants[variant],
@@ -32,6 +35,6 @@ export function Button({ variant = 'primary', size = 'md', className, children, 
       {...props}
     >
       {children}
-    </button>
+    </Comp>
   )
 }
