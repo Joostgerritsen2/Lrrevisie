@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "shop": "Shop",
+    "guides": "Guides",
+    "about": "About",
+    "contact": "Contact",
+    "search": "Search by part number...",
+    "cart": "Cart"
+  },
+  "hero": {
+    "eyebrow": "Land Rover & Range Rover Specialist",
+    "headline": "Revision parts. Expert quality.",
+    "subtext": "Gearboxes, transfer cases, differentials and steering boxes. Over 418 parts in stock for immediate delivery.",
+    "cta_shop": "Browse the shop",
+    "cta_guides": "Technical guides"
+  },
+  "usp": {
+    "shipping_title": "Free shipping",
+    "shipping_sub": "From €75,- in NL & BE",
+    "delivery_title": "Fast delivery",
+    "delivery_sub": "1–3 working days",
+    "expertise_title": "30+ years expertise",
+    "expertise_sub": "Expert revision",
+    "payment_title": "iDEAL & Bancontact",
+    "payment_sub": "Secure payment via Mollie"
+  },
+  "shop": {
+    "title": "Shop",
+    "all_categories": "All categories",
+    "products": "products",
+    "add_to_cart": "Add to cart",
+    "in_stock": "In stock",
+    "out_of_stock": "Out of stock",
+    "sort_price_asc": "Price low–high",
+    "sort_price_desc": "Price high–low",
+    "sort_name": "Name A–Z"
+  },
+  "product": {
+    "tab_description": "Description",
+    "tab_specs": "Specifications",
+    "tab_compat": "Compatibility",
+    "article_number": "Article number",
+    "related": "Related products"
+  },
+  "footer": {
+    "tagline": "Reliable and expert revision of transfer cases, gearboxes and parts for Land Rover and Range Rover.",
+    "shop": "Shop",
+    "info": "Info",
+    "service": "Customer service",
+    "copyright": "© 2025 LR Revisie — Land Rover & Range Rover Specialist"
+  }
+}

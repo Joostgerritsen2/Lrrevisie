@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "shop": "Winkel",
+    "guides": "Gidsen",
+    "about": "Over ons",
+    "contact": "Contact",
+    "search": "Zoek op artikelnummer...",
+    "cart": "Winkelwagen"
+  },
+  "hero": {
+    "eyebrow": "Land Rover & Range Rover Specialist",
+    "headline": "Revisie-onderdelen. Vakkundig.",
+    "subtext": "Versnellingsbakken, tussenbakken, differentielen en stuurhuizen. Meer dan 418 onderdelen direct leverbaar.",
+    "cta_shop": "Bekijk de winkel",
+    "cta_guides": "Technische gidsen"
+  },
+  "usp": {
+    "shipping_title": "Gratis verzending",
+    "shipping_sub": "Vanaf €75,- in NL & BE",
+    "delivery_title": "Snelle levering",
+    "delivery_sub": "1–3 werkdagen",
+    "expertise_title": "30+ jaar expertise",
+    "expertise_sub": "Vakkundige revisie",
+    "payment_title": "iDEAL & Bancontact",
+    "payment_sub": "Veilig betalen via Mollie"
+  },
+  "shop": {
+    "title": "Winkel",
+    "all_categories": "Alle categorieën",
+    "products": "producten",
+    "add_to_cart": "In winkelwagen",
+    "in_stock": "Op voorraad",
+    "out_of_stock": "Niet op voorraad",
+    "sort_price_asc": "Prijs laag–hoog",
+    "sort_price_desc": "Prijs hoog–laag",
+    "sort_name": "Naam A–Z"
+  },
+  "product": {
+    "tab_description": "Beschrijving",
+    "tab_specs": "Specificaties",
+    "tab_compat": "Compatibiliteit",
+    "article_number": "Artikelnummer",
+    "related": "Gerelateerde producten"
+  },
+  "footer": {
+    "tagline": "Betrouwbare en vakkundige revisie van tussenbakken, versnellingsbakken en onderdelen voor Land Rover en Range Rover.",
+    "shop": "Winkel",
+    "info": "Info",
+    "service": "Klantenservice",
+    "copyright": "© 2025 LR Revisie — Land Rover & Range Rover Specialist"
+  }
+}
