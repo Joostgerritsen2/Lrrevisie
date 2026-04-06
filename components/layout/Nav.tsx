@@ -40,10 +40,10 @@ export function Nav({ locale }: { locale: string }) {
         <Image
           src="/lr-logo.png"
           alt="LR Revisie"
-          width={140}
-          height={43}
+          width={280}
+          height={86}
+          quality={100}
           className="h-9 w-auto object-contain transition-all duration-200"
-          style={{ filter: 'brightness(1.1) saturate(1.2)' }}
           priority
         />
       </Link>
