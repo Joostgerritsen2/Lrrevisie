@@ -15,7 +15,7 @@ export const product = defineType({
       type: 'number',
       validation: r => r.required().min(0),
     }),
-    defineField({ name: 'saleProijs', title: 'Aanbiedingsprijs (centen)', type: 'number' }),
+    defineField({ name: 'salePrijs', title: 'Aanbiedingsprijs (centen)', type: 'number' }),
     defineField({
       name: 'categorie',
       title: 'Categorie',
@@ -34,8 +34,8 @@ export const product = defineType({
         {
           type: 'object',
           fields: [
-            { name: 'label', type: 'string', title: 'Label' },
-            { name: 'waarde', type: 'string', title: 'Waarde' },
+            defineField({ name: 'label', type: 'string', title: 'Label' }),
+            defineField({ name: 'waarde', type: 'string', title: 'Waarde' }),
           ],
         },
       ],

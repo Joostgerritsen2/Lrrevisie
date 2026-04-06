@@ -1,6 +1,5 @@
 import { defineType, defineField } from 'sanity'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const settings = defineType({
   name: 'settings',
   title: 'Site-instellingen',

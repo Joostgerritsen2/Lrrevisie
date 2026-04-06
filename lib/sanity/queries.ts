@@ -14,7 +14,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY = `
     _id, naam, naamEn, artikelnummer,
     "slug": slug.current,
     "categorie": categorie->{ naam, "slug": slug.current },
-    prijs, saleProijs, inVoorraad,
+    prijs, salePrijs, inVoorraad,
     "afbeelding": afbeeldingen[0]
   }
 `
@@ -25,7 +25,7 @@ export const PRODUCT_QUERY = `
     _id, naam, naamEn, artikelnummer,
     "slug": slug.current,
     "categorie": categorie->{ naam, naamEn, "slug": slug.current },
-    prijs, saleProijs, inVoorraad,
+    prijs, salePrijs, inVoorraad,
     afbeeldingen, beschrijving, beschrijvingEn,
     specificaties, compatibiliteit,
     seoTitle, seoDescription,
@@ -39,7 +39,7 @@ export const PRODUCT_QUERY = `
 
 // Alle product slugs (voor generateStaticParams)
 export const ALL_PRODUCT_SLUGS_QUERY = `
-  *[_type == "product"] {
+  *[_type == "product" && defined(slug.current)] {
     "slug": slug.current,
     "categorie": categorie->slug.current
   }

@@ -19,4 +19,7 @@ export const guide = defineType({
     }),
     defineField({ name: 'gepubliceerdOp', title: 'Gepubliceerd op', type: 'datetime' }),
   ],
+  preview: {
+    select: { title: 'titel' },
+  },
 })
