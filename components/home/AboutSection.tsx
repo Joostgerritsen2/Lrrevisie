@@ -12,7 +12,7 @@ interface AboutSectionProps {
 export function AboutSection({ eigenaarNaam, eigenaarBio, eigenaarFoto }: AboutSectionProps) {
   return (
     <section className="bg-bg-grey py-14 md:py-20 px-5 md:px-10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+      <div className={`max-w-7xl mx-auto grid grid-cols-1 gap-10 lg:gap-20 items-center ${eigenaarFoto ? 'lg:grid-cols-2' : 'max-w-3xl'}`}>
         {/* Tekst + stats */}
         <div>
           <div className="flex items-center gap-2 mb-2.5">
@@ -41,31 +41,23 @@ export function AboutSection({ eigenaarNaam, eigenaarBio, eigenaarFoto }: AboutS
           </div>
         </div>
 
-        {/* Eigenaarsfoto + werkplaatsfotos — Parallax: foto's scrollen iets langzamer */}
-        <Parallax speed={0.08} className="grid grid-cols-2 gap-1">
-          {eigenaarFoto && (
-            <div className="col-span-2 relative aspect-[16/7] overflow-hidden bg-bg-card">
-              <Image
-                src={urlFor(eigenaarFoto).width(800).height(350).url()}
-                alt={eigenaarNaam || 'Eigenaar LR Revisie'}
-                fill
-                className="object-cover object-top saturate-75"
-              />
-              {eigenaarNaam && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary/90 to-transparent px-6 py-4">
-                  <span className="text-sm font-semibold text-white">{eigenaarNaam}</span>
-                  <span className="text-xs text-text-muted ml-2">— Eigenaar LR Revisie</span>
-                </div>
-              )}
-            </div>
-          )}
-          <div className="relative aspect-square overflow-hidden bg-bg-card">
-            <Image src="https://lr-revisie.nl/wp-content/uploads/2023/01/UKC75L-scaled.jpg" alt="Onderdeel" fill className="object-cover saturate-75" />
-          </div>
-          <div className="relative aspect-square overflow-hidden bg-bg-card">
-            <Image src="https://lr-revisie.nl/wp-content/uploads/2023/01/RTC2914-scaled.jpg" alt="Onderdeel" fill className="object-cover saturate-75" />
-          </div>
-        </Parallax>
+        {/* Eigenaarsfoto */}
+        {eigenaarFoto ? (
+          <Parallax speed={0.08} className="relative aspect-[4/3] overflow-hidden bg-bg-card border border-brand-primary/20">
+            <Image
+              src={urlFor(eigenaarFoto).width(800).height(600).url()}
+              alt={eigenaarNaam || 'Eigenaar LR Revisie'}
+              fill
+              className="object-cover object-top saturate-75"
+            />
+            {eigenaarNaam && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary/90 to-transparent px-6 py-4">
+                <span className="text-sm font-semibold text-white">{eigenaarNaam}</span>
+                <span className="text-xs text-text-muted ml-2">— Eigenaar LR Revisie</span>
+              </div>
+            )}
+          </Parallax>
+        ) : null}
       </div>
     </section>
   )
