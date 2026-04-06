@@ -70,6 +70,7 @@ export function NavSearch({ locale }: { locale: string }) {
                   alt={r.naam}
                   width={48}
                   height={48}
+                  loading="lazy"
                   className="object-cover flex-shrink-0"
                 />
               )}

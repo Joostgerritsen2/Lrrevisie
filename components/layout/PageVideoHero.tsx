@@ -62,6 +62,7 @@ export function PageVideoHero({
         muted
         loop
         playsInline
+        preload="none"
         className="absolute inset-0 w-full h-full object-cover scale-110"
         style={{ filter: 'brightness(0.32) saturate(0.6) contrast(1.1)', willChange: 'transform' }}
       >

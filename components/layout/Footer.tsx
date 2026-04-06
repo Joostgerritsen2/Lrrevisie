@@ -25,6 +25,7 @@ export async function Footer({ locale }: { locale: string }) {
               alt="LR Revisie"
               width={120}
               height={37}
+              loading="lazy"
               className="h-8 w-auto object-contain mb-5"
               style={{ opacity: 0.55 }}
             />

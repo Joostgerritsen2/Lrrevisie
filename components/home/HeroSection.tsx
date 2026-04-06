@@ -40,6 +40,7 @@ export function HeroSection({ locale }: { locale: string }) {
         muted
         loop
         playsInline
+        preload="none"
         poster={POSTER_URL}
         className="absolute inset-0 w-full h-full object-cover scale-105"
         style={{ filter: 'brightness(0.5) saturate(0.9) contrast(1.1)', willChange: 'transform' }}

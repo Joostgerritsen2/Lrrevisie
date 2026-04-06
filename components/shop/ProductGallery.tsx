@@ -38,6 +38,7 @@ export function ProductGallery({ images }: { images: SanityImageSource[] }) {
                 src={urlFor(img).width(64).height(64).url()}
                 alt={`Foto ${i + 1}`}
                 fill
+                loading="lazy"
                 className="object-contain p-1"
               />
             </button>

@@ -43,6 +43,8 @@ export function ProductCard({ id, naam, artikelnummer, slug, categorie, prijs, s
             src={urlFor(afbeelding).width(400).height(400).url()}
             alt={naam}
             fill
+            loading="lazy"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
           />
         ) : (

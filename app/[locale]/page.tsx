@@ -1,14 +1,17 @@
+import dynamic from 'next/dynamic'
 import { sanityClient } from '@/lib/sanity/client'
 import { CATEGORIES_QUERY, SETTINGS_QUERY, FEATURED_PRODUCTS_QUERY } from '@/lib/sanity/queries'
-import { HeroSection } from '@/components/home/HeroSection'
 import { UspBar } from '@/components/home/UspBar'
 import { CategoryCard } from '@/components/shop/CategoryCard'
 import { ProductCard } from '@/components/shop/ProductCard'
-import { AboutSection } from '@/components/home/AboutSection'
-import { FaqSection } from '@/components/home/FaqSection'
 import { Parallax } from '@/components/ui/Parallax'
 import Link from 'next/link'
 import { Search, ArrowRight } from 'lucide-react'
+
+// Client-components lazy geladen — verminderen initiële bundle
+const HeroSection  = dynamic(() => import('@/components/home/HeroSection').then(m => ({ default: m.HeroSection })))
+const AboutSection = dynamic(() => import('@/components/home/AboutSection').then(m => ({ default: m.AboutSection })))
+const FaqSection   = dynamic(() => import('@/components/home/FaqSection').then(m => ({ default: m.FaqSection })))
 
 interface PageProps {
   params: Promise<{ locale: string }>
