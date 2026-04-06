@@ -3,7 +3,8 @@ export const CATEGORIES_QUERY = `
   *[_type == "category"] | order(volgorde asc) {
     _id, naam, naamEn, "slug": slug.current,
     beschrijving, beschrijvingEn, afbeelding,
-    "productCount": count(*[_type == "product" && references(^._id)])
+    "productCount": count(*[_type == "product" && references(^._id)]),
+    "productAfbeelding": *[_type == "product" && references(^._id) && count(afbeeldingen) > 0][0].afbeeldingen[0]
   }
 `
 

@@ -3,6 +3,7 @@ import { ShoppingBag, Wrench, ChevronDown } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import { useEffect, useRef } from 'react'
 
 // Mixkit CC0 video — draaiende metalen tandwielen, past perfect bij een gearbox specialist
 const VIDEO_URL = 'https://assets.mixkit.co/videos/32653/32653-720.mp4'
@@ -11,19 +12,37 @@ const POSTER_URL = 'https://lr-revisie.nl/wp-content/uploads/2022/09/2117686472-
 
 export function HeroSection({ locale }: { locale: string }) {
   const t = useTranslations('hero')
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        if (video) video.style.transform = `translateY(${window.scrollY * 0.3}px)`
+        ticking = false
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <section className="relative h-[70vh] min-h-[480px] max-h-[680px] flex items-end overflow-hidden bg-bg-primary">
 
-      {/* Video achtergrond */}
+      {/* Video achtergrond — met parallax */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
         poster={POSTER_URL}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: 'brightness(0.28) saturate(0.55) contrast(1.1)' }}
+        style={{ filter: 'brightness(0.28) saturate(0.55) contrast(1.1)', willChange: 'transform' }}
       >
         <source src={VIDEO_URL} type="video/mp4" />
         {/* Fallback: toon poster */}

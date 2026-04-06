@@ -5,6 +5,7 @@ import { UspBar } from '@/components/home/UspBar'
 import { CategoryCard } from '@/components/shop/CategoryCard'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { AboutSection } from '@/components/home/AboutSection'
+import { Parallax } from '@/components/ui/Parallax'
 import Link from 'next/link'
 import { Search, ArrowRight } from 'lucide-react'
 
@@ -26,7 +27,7 @@ export default async function HomePage({ params }: PageProps) {
       <UspBar />
 
       {/* ─── Categorieën ───────────────────────────────────────────── */}
-      <section className="bg-bg-primary py-16 md:py-24 px-5 md:px-10">
+      <section className="bg-bg-primary py-16 md:py-24 px-5 md:px-10 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-8 md:mb-10">
             <div>
@@ -42,11 +43,12 @@ export default async function HomePage({ params }: PageProps) {
             </Link>
           </div>
 
+          <Parallax speed={0.05}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5">
             {categories.map((cat: {
               _id: string; naam: string; naamEn?: string; slug: string
               beschrijving?: string; beschrijvingEn?: string
-              afbeelding?: unknown; productCount: number
+              afbeelding?: unknown; productAfbeelding?: unknown; productCount: number
             }, i: number) => (
               <CategoryCard
                 key={cat._id}
@@ -54,12 +56,14 @@ export default async function HomePage({ params }: PageProps) {
                 slug={cat.slug}
                 beschrijving={locale === 'en' && cat.beschrijvingEn ? cat.beschrijvingEn : cat.beschrijving}
                 afbeelding={cat.afbeelding as Parameters<typeof CategoryCard>[0]['afbeelding']}
+                productAfbeelding={cat.productAfbeelding as Parameters<typeof CategoryCard>[0]['productAfbeelding']}
                 productCount={cat.productCount}
                 featured={i === 0}
                 locale={locale}
               />
             ))}
           </div>
+          </Parallax>
         </div>
       </section>
 
