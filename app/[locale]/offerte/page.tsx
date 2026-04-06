@@ -13,7 +13,7 @@ export default async function OffertePage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-bg-primary">
-      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 pt-28 pb-10 md:pt-32 md:pb-12">
+      <div className="bg-bg-warm border-b border-white/6 px-5 md:px-10 pt-24 pb-7 md:pt-28 md:pb-9">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-4 flex-wrap">
             <Link href={`/${locale}`} className="hover:text-white transition-colors">Home</Link>
