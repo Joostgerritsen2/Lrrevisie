@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ShoppingCart } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { usePathname } from 'next/navigation'
 import { NavSearch } from './NavSearch'
 import { useCartStore } from '@/lib/cart'
 
@@ -14,6 +15,13 @@ interface NavProps {
 export function Nav({ locale, transparent = false }: NavProps) {
   const t = useTranslations('nav')
   const itemCount = useCartStore(s => s.items.reduce((n, i) => n + i.quantity, 0))
+  const pathname = usePathname()
+
+  function switchLocalePath(targetLocale: string) {
+    const segments = pathname.split('/')
+    segments[1] = targetLocale
+    return segments.join('/')
+  }
 
   return (
     <nav
@@ -49,9 +57,9 @@ export function Nav({ locale, transparent = false }: NavProps) {
       {/* Rechts */}
       <div className="flex items-center gap-3">
         <span className="text-xs text-white/40">
-          <Link href={locale === 'nl' ? '/nl' : '/nl'} className={locale === 'nl' ? 'text-white font-semibold' : ''}>NL</Link>
+          <Link href={switchLocalePath('nl')} className={locale === 'nl' ? 'text-white font-semibold' : ''}>NL</Link>
           {' / '}
-          <Link href={locale === 'en' ? '/en' : '/en'} className={locale === 'en' ? 'text-white font-semibold' : ''}>EN</Link>
+          <Link href={switchLocalePath('en')} className={locale === 'en' ? 'text-white font-semibold' : ''}>EN</Link>
         </span>
         <NavSearch locale={locale} />
         <Link
