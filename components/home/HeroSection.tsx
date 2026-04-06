@@ -83,7 +83,7 @@ export function HeroSection({ locale }: { locale: string }) {
         </p>
 
         {/* CTA buttons */}
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-row flex-wrap gap-3">
           <Button variant="primary" size="lg" asChild>
             <Link href={`/${locale}/winkel`}>
               <ShoppingBag size={16} />
@@ -99,8 +99,8 @@ export function HeroSection({ locale }: { locale: string }) {
         </div>
       </div>
 
-      {/* Stats blokken rechtsonder */}
-      <div className="absolute bottom-0 right-0 flex z-10">
+      {/* Stats blokken rechtsonder — verborgen op mobile */}
+      <div className="hidden sm:flex absolute bottom-0 right-0 z-10">
         {[
           { num: '531',  label: 'Onderdelen' },
           { num: '30+',  label: 'Jaar ervaring' },
