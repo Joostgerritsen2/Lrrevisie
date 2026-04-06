@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation'
-import { Check } from 'lucide-react'
+import { Check, X, ShieldCheck, Truck, RotateCcw, Phone, ChevronRight } from 'lucide-react'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { sanityClient } from '@/lib/sanity/client'
 import { PRODUCT_QUERY, ALL_PRODUCT_SLUGS_QUERY } from '@/lib/sanity/queries'
 import { ProductGallery } from '@/components/shop/ProductGallery'
 import { ProductTabs } from '@/components/shop/ProductTabs'
 import { ProductCard } from '@/components/shop/ProductCard'
-import { Badge } from '@/components/ui/Badge'
 import { formatPrice } from '@/lib/utils'
 import { AddToCartButton } from '@/components/shop/AddToCartButton'
 
@@ -46,40 +46,87 @@ export default async function ProductPage({ params }: PageProps) {
   const beschrijving = locale === 'en' && product.beschrijvingEn ? product.beschrijvingEn : product.beschrijving
 
   return (
-    <div className="min-h-screen pt-16">
-      <div className="max-w-7xl mx-auto px-10 py-12">
-        {/* Breadcrumb */}
-        <div className="text-xs text-brand-accent tracking-[2px] uppercase mb-8">
-          <a href={`/${locale}`}>Home</a> / <a href={`/${locale}/winkel`}>Winkel</a> / <a href={`/${locale}/winkel/${product.categorie.slug}`}>{product.categorie.naam}</a> / {naam}
-        </div>
+    <div className="min-h-screen pt-16 bg-bg-primary">
 
-        {/* Product hoofdsectie */}
-        <div className="grid grid-cols-2 gap-16 mb-16">
+      {/* Breadcrumb */}
+      <div className="border-b border-white/5 bg-bg-card/50">
+        <div className="max-w-7xl mx-auto px-5 md:px-10 py-3">
+          <div className="flex items-center gap-1.5 text-xs text-text-subtle flex-wrap">
+            <Link href={`/${locale}`} className="hover:text-white transition-colors">Home</Link>
+            <ChevronRight size={11} className="text-white/20" />
+            <Link href={`/${locale}/winkel`} className="hover:text-white transition-colors">Winkel</Link>
+            <ChevronRight size={11} className="text-white/20" />
+            <Link href={`/${locale}/winkel/${product.categorie.slug}`} className="hover:text-white transition-colors">
+              {product.categorie.naam}
+            </Link>
+            <ChevronRight size={11} className="text-white/20" />
+            <span className="text-white/50 truncate max-w-[200px]">{naam}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Product hoofdsectie */}
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-8 md:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+
+          {/* Linker kolom: Gallery */}
           <ProductGallery images={product.afbeeldingen ?? []} />
 
-          {/* Rechterkolom */}
-          <div>
-            <div className="text-xs font-mono text-text-subtle mb-2">{product.artikelnummer}</div>
-            <h1 className="text-3xl font-extrabold tracking-[-0.5px] mb-4">{naam}</h1>
+          {/* Rechter kolom: Info + Kopen */}
+          <div className="flex flex-col">
+            {/* Categorie + artikelnummer */}
+            <div className="flex items-center gap-3 mb-3">
+              <Link href={`/${locale}/winkel/${product.categorie.slug}`}
+                className="text-[10px] font-bold tracking-[2px] uppercase text-brand-accent/80 hover:text-brand-accent transition-colors bg-brand-primary/20 border border-brand-accent/15 px-2.5 py-1">
+                {product.categorie.naam}
+              </Link>
+              <span className="text-xs font-mono text-text-subtle">{product.artikelnummer}</span>
+            </div>
 
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl font-extrabold text-brand-accent">
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-[-0.5px] leading-tight mb-4">{naam}</h1>
+
+            {/* Prijs */}
+            <div className="flex items-baseline gap-3 mb-4">
+              <span className="text-3xl md:text-4xl font-extrabold text-brand-accent">
                 {formatPrice(product.salePrijs ?? product.prijs)}
               </span>
               {product.salePrijs && (
                 <span className="text-lg text-text-subtle line-through">{formatPrice(product.prijs)}</span>
               )}
+              <span className="text-xs text-text-subtle">incl. BTW</span>
             </div>
 
-            <div className="mb-8">
+            {/* Voorraad status */}
+            <div className="flex items-center gap-2 mb-6">
               {product.inVoorraad ? (
-                <Badge variant="success"><Check size={12} className="mr-1" />Op voorraad</Badge>
+                <>
+                  <span className="w-2 h-2 bg-brand-accent rounded-full animate-pulse" />
+                  <span className="text-sm font-medium text-brand-accent">Op voorraad</span>
+                </>
               ) : (
-                <Badge variant="neutral">Niet op voorraad</Badge>
+                <>
+                  <X size={14} className="text-red-400" />
+                  <span className="text-sm font-medium text-red-400">Niet op voorraad</span>
+                </>
               )}
             </div>
 
-            {product.inVoorraad && (
+            {/* Korte specs (top 4) */}
+            {product.specificaties?.length > 0 && (
+              <div className="bg-bg-card border border-brand-primary/20 p-4 mb-6">
+                <dl className="grid grid-cols-2 gap-x-4 gap-y-2.5">
+                  {product.specificaties.slice(0, 4).map((s: { label: string; waarde: string }) => (
+                    <div key={s.label} className="min-w-0">
+                      <dt className="text-[10px] font-bold tracking-[1.5px] uppercase text-text-subtle mb-0.5 truncate">{s.label}</dt>
+                      <dd className="text-sm font-semibold text-white truncate">{s.waarde}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+
+            {/* CTA */}
+            {product.inVoorraad ? (
               <AddToCartButton
                 id={product._id}
                 naam={naam}
@@ -89,38 +136,53 @@ export default async function ProductPage({ params }: PageProps) {
                 prijs={product.prijs}
                 afbeelding={product.afbeeldingen?.[0]}
               />
+            ) : (
+              <Link href={`/${locale}/contact`}
+                className="flex items-center justify-center gap-2 bg-bg-card border border-brand-primary/40 px-6 py-3.5 text-sm font-bold hover:border-brand-accent/40 transition-colors mb-4">
+                <Phone size={14} /> Vraag naar beschikbaarheid
+              </Link>
             )}
 
-            {/* Quick specs */}
-            {product.specificaties?.length > 0 && (
-              <div className="mt-8 border-t border-border pt-6">
-                <h3 className="text-xs font-bold tracking-[2px] uppercase text-text-muted mb-4">Specificaties</h3>
-                <dl className="space-y-2">
-                  {product.specificaties.slice(0, 4).map((s: { label: string; waarde: string }) => (
-                    <div key={s.label} className="flex gap-3 text-sm">
-                      <dt className="text-text-muted w-32 flex-shrink-0">{s.label}</dt>
-                      <dd className="text-white">{s.waarde}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            )}
+            {/* Trust badges */}
+            <div className="grid grid-cols-3 gap-2 mt-6 pt-6 border-t border-white/6">
+              {[
+                { icon: ShieldCheck, title: '2 jaar garantie', sub: 'op alle revisies' },
+                { icon: Truck,       title: 'EU verzending',   sub: 'snel geleverd' },
+                { icon: RotateCcw,   title: '14 dagen',        sub: 'retourrecht' },
+              ].map(({ icon: Icon, title, sub }) => (
+                <div key={title} className="flex flex-col items-center text-center gap-1.5 p-3 bg-bg-card/50 border border-white/5">
+                  <Icon size={16} className="text-brand-accent" />
+                  <span className="text-[11px] font-bold text-white leading-tight">{title}</span>
+                  <span className="text-[10px] text-text-subtle leading-tight">{sub}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Tabs */}
-        <ProductTabs
-          beschrijving={beschrijving}
-          specificaties={product.specificaties}
-          compatibiliteit={product.compatibiliteit}
-        />
+        {/* Tabs: beschrijving + alle specs */}
+        <div className="mt-12 md:mt-16">
+          <ProductTabs
+            beschrijving={beschrijving}
+            specificaties={product.specificaties}
+            compatibiliteit={product.compatibiliteit}
+          />
+        </div>
 
         {/* Gerelateerde producten */}
         {product.gerelateerdeProducten?.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-2xl font-extrabold tracking-[-0.5px] mb-6">Gerelateerde producten</h2>
-            <div className="grid grid-cols-4 gap-0.5">
-              {product.gerelateerdeProducten.map((rel: { _id: string; naam: string; naamEn?: string; artikelnummer: string; slug: string; categorie: { naam: string; slug: string }; prijs: number; inVoorraad: boolean; afbeelding?: unknown }) => (
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-5 h-0.5 bg-brand-accent" />
+              <span className="text-[10px] font-bold tracking-[3px] uppercase text-brand-accent">Mogelijk ook interessant</span>
+            </div>
+            <h2 className="text-xl font-extrabold tracking-[-0.5px] mb-6">Gerelateerde producten</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5">
+              {product.gerelateerdeProducten.map((rel: {
+                _id: string; naam: string; naamEn?: string; artikelnummer: string
+                slug: string; categorie: { naam: string; slug: string }
+                prijs: number; inVoorraad: boolean; afbeelding?: unknown
+              }) => (
                 <ProductCard
                   key={rel._id}
                   id={rel._id}
