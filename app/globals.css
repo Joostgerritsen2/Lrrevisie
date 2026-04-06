@@ -1,12 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+@theme {
+  /* Achtergronden */
+  --color-bg-primary:    #030A05;
+  --color-bg-card:       #060F08;
+  --color-bg-elevated:   #091409;
+  --color-bg-green:      #003D1F;
+  --color-bg-deep-green: #002B16;
+
+  /* Brand kleuren */
+  --color-brand-primary: #005B2F;
+  --color-brand-accent:  #00A652;
+  --color-brand-dark:    #003D1F;
+
+  /* Borders */
+  --color-border:        rgba(0, 91, 47, 0.25);
+  --color-border-hover:  rgba(0, 166, 82, 0.4);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Tekst */
+  --color-text-primary: #FFFFFF;
+  --color-text-muted:   rgba(255, 255, 255, 0.5);
+  --color-text-subtle:  rgba(255, 255, 255, 0.25);
+  --color-text-accent:  #00A652;
+
+  /* Typografie */
+  --font-sans: Inter, system-ui, -apple-system, sans-serif;
+
+  /* Border radius: altijd 0 (scherp) */
+  --radius:    0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-full: 9999px;
+}
+
 @layer base {
   * { border-radius: 0 !important; }
   body {
     background-color: #030A05;
     color: #ffffff;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -23,12 +60,25 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: #00A652;
+    background: linear-gradient(90deg, #00A652 70%, #00A65200 100%);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.25s;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
   }
   .accent-line-top:hover::before {
     transform: scaleX(1);
   }
+}
+
+/* Subtiele groene scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #030A05; }
+::-webkit-scrollbar-thumb { background: #003D1F; }
+::-webkit-scrollbar-thumb:hover { background: #00A652; }
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid #00A652 !important;
+  outline-offset: 2px;
 }

@@ -38,7 +38,7 @@ export default async function CategoriePage({ params, searchParams }: PageProps)
   return (
     <div className="min-h-screen pt-16">
       {/* Header */}
-      <div className="bg-bg-green border-b border-brand-primary/30 px-10 py-12">
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-xs text-brand-accent tracking-[2px] uppercase mb-2">
             <a href={`/${locale}`}>Home</a> / <a href={`/${locale}/winkel`}>Winkel</a> / {catNaam}
@@ -48,14 +48,14 @@ export default async function CategoriePage({ params, searchParams }: PageProps)
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-10 py-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-8 md:py-10">
         {/* SortSelect wrapped in Suspense (uses useSearchParams) */}
         <Suspense fallback={null}>
           <SortSelect current={sort} />
         </Suspense>
 
         {/* Productgrid */}
-        <div className="grid grid-cols-4 gap-0.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-0.5">
           {sorted.map((product: { _id: string; naam: string; naamEn?: string; artikelnummer: string; slug: string; categorie: { naam: string; slug: string }; prijs: number; salePrijs?: number; inVoorraad: boolean; afbeelding?: unknown }) => (
             <ProductCard
               key={product._id}

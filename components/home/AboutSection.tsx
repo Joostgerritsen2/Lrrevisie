@@ -10,8 +10,8 @@ interface AboutSectionProps {
 
 export function AboutSection({ eigenaarNaam, eigenaarBio, eigenaarFoto }: AboutSectionProps) {
   return (
-    <section className="bg-[#020806] py-20 px-10">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 gap-20 items-center">
+    <section className="bg-[#020806] py-14 md:py-20 px-5 md:px-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
         {/* Tekst + stats */}
         <div>
           <div className="flex items-center gap-2 mb-2.5">

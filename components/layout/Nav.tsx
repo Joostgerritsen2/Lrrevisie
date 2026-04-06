@@ -8,11 +8,7 @@ import { useState, useEffect } from 'react'
 import { NavSearch } from './NavSearch'
 import { useCartStore } from '@/lib/cart'
 
-interface NavProps {
-  locale: string
-}
-
-export function Nav({ locale }: NavProps) {
+export function Nav({ locale }: { locale: string }) {
   const t = useTranslations('nav')
   const itemCount = useCartStore(s => s.items.reduce((n, i) => n + i.quantity, 0))
   const pathname = usePathname()
@@ -24,57 +20,73 @@ export function Nav({ locale }: NavProps) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  function switchLocalePath(targetLocale: string) {
-    const segments = pathname.split('/')
-    segments[1] = targetLocale
-    return segments.join('/')
+  function switchLocalePath(target: string) {
+    const segs = pathname.split('/')
+    segs[1] = target
+    return segs.join('/')
   }
 
   return (
-    <nav
-      className={`
-        fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-16 px-10
-        transition-all duration-300
-        ${scrolled
-          ? 'bg-bg-primary/97 backdrop-blur-sm border-b border-white/5 shadow-lg shadow-black/20'
-          : 'bg-gradient-to-b from-black/60 to-transparent border-transparent'
-        }
-      `}
-    >
-      {/* Logo */}
-      <Link href={`/${locale}`}>
+    <nav className={`
+      fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-16 px-5 md:px-10
+      transition-all duration-300
+      ${scrolled
+        ? 'bg-bg-primary/97 backdrop-blur-md border-b border-white/6 shadow-2xl shadow-black/30'
+        : 'bg-gradient-to-b from-black/70 to-transparent'
+      }
+    `}>
+      {/* Logo — transparante PNG, donkergroen → helder via filter */}
+      <Link href={`/${locale}`} className="group flex-shrink-0">
         <Image
-          src="https://lr-revisie.nl/wp-content/uploads/2023/04/LR_Logo.jpg"
+          src="/logo.png"
           alt="LR Revisie"
-          width={120}
-          height={37}
-          className="h-9 w-auto object-contain"
+          width={140}
+          height={43}
+          className="h-9 w-auto object-contain transition-all duration-200"
+          style={{ filter: 'brightness(3) saturate(1.1)' }}
           priority
         />
       </Link>
 
-      {/* Links */}
-      <div className="flex items-center gap-8">
-        <Link href={`/${locale}/winkel`} className="text-text-muted hover:text-white text-sm font-medium transition-colors">{t('shop')}</Link>
-        <Link href={`/${locale}/gidsen`} className="text-text-muted hover:text-white text-sm font-medium transition-colors">{t('guides')}</Link>
-        <Link href={`/${locale}/over-ons`} className="text-text-muted hover:text-white text-sm font-medium transition-colors">{t('about')}</Link>
-        <Link href={`/${locale}/contact`} className="text-text-muted hover:text-white text-sm font-medium transition-colors">{t('contact')}</Link>
+      {/* Nav links */}
+      <div className="hidden md:flex items-center gap-7 lg:gap-9">
+        <Link href={`/${locale}/winkel`}
+          className="relative text-sm font-medium text-white/65 hover:text-white transition-colors after:absolute after:bottom-[-3px] after:left-0 after:right-0 after:h-px after:bg-brand-accent after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200">
+          {t('shop')}
+        </Link>
+        <Link href={`/${locale}/gidsen`}
+          className="relative text-sm font-medium text-white/65 hover:text-white transition-colors after:absolute after:bottom-[-3px] after:left-0 after:right-0 after:h-px after:bg-brand-accent after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200">
+          {t('guides')}
+        </Link>
+        <Link href={`/${locale}/over-ons`}
+          className="relative text-sm font-medium text-white/65 hover:text-white transition-colors after:absolute after:bottom-[-3px] after:left-0 after:right-0 after:h-px after:bg-brand-accent after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200">
+          {t('about')}
+        </Link>
+        <Link href={`/${locale}/contact`}
+          className="relative text-sm font-medium text-white/65 hover:text-white transition-colors after:absolute after:bottom-[-3px] after:left-0 after:right-0 after:h-px after:bg-brand-accent after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200">
+          {t('contact')}
+        </Link>
       </div>
 
       {/* Rechts */}
-      <div className="flex items-center gap-3">
-        <span className="text-xs text-white/40">
-          <Link href={switchLocalePath('nl')} className={locale === 'nl' ? 'text-white font-semibold' : ''}>NL</Link>
-          {' / '}
-          <Link href={switchLocalePath('en')} className={locale === 'en' ? 'text-white font-semibold' : ''}>EN</Link>
+      <div className="flex items-center gap-2 md:gap-3">
+        <span className="hidden lg:flex text-[11px] text-white/35 gap-1 items-center">
+          <Link href={switchLocalePath('nl')}
+            className={locale === 'nl' ? 'text-white font-bold' : 'hover:text-white/60 transition-colors'}>NL</Link>
+          <span className="text-white/20">·</span>
+          <Link href={switchLocalePath('en')}
+            className={locale === 'en' ? 'text-white font-bold' : 'hover:text-white/60 transition-colors'}>EN</Link>
         </span>
         <NavSearch locale={locale} />
         <Link
           href={`/${locale}/winkelwagen`}
-          className="flex items-center gap-2 bg-brand-primary border border-brand-accent px-4 py-2 text-sm font-semibold hover:bg-brand-accent transition-colors"
+          className="flex items-center gap-2 bg-brand-primary border border-brand-accent/70 px-3.5 md:px-4 py-2 text-sm font-bold hover:bg-brand-accent hover:border-brand-accent transition-all duration-200 group"
         >
-          <ShoppingCart size={16} />
-          {itemCount > 0 ? itemCount : t('cart')}
+          <ShoppingCart size={15} className="group-hover:scale-110 transition-transform" />
+          <span className="hidden sm:inline">
+            {itemCount > 0 ? `(${itemCount})` : t('cart')}
+          </span>
+          {itemCount > 0 && <span className="sm:hidden">{itemCount}</span>}
         </Link>
       </div>
     </nav>

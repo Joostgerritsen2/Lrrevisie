@@ -50,6 +50,18 @@ export const ALL_CATEGORY_SLUGS_QUERY = `
   *[_type == "category"] { "slug": slug.current }
 `
 
+// Uitgelichte producten (met afbeelding, meest recent geïmporteerd)
+export const FEATURED_PRODUCTS_QUERY = `
+  *[_type == "product" && count(afbeeldingen) > 0 && inVoorraad == true]
+  | order(_createdAt desc) [0...8] {
+    _id, naam, artikelnummer,
+    "slug": slug.current,
+    prijs, salePrijs, inVoorraad,
+    "afbeelding": afbeeldingen[0],
+    "categorie": categorie->{ naam, naamEn, "slug": slug.current }
+  }
+`
+
 // Settings
 export const SETTINGS_QUERY = `*[_type == "settings"][0]`
 

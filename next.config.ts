@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { hostname: 'cdn.sanity.io' },
       { hostname: 'lr-revisie.nl' },
+      { hostname: 'assets.mixkit.co' },
     ],
   },
   async redirects() {

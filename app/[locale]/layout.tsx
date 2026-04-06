@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
-import '../globals.css'
 
 export const metadata: Metadata = {
   title: { default: 'LR Revisie — Land Rover Specialist', template: '%s | LR Revisie' },
@@ -27,14 +26,10 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <Nav locale={locale} />
-          <main>{children}</main>
-          <Footer locale={locale} />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <Nav locale={locale} />
+      <main>{children}</main>
+      <Footer locale={locale} />
+    </NextIntlClientProvider>
   )
 }

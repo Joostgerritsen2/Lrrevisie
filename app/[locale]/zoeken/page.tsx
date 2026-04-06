@@ -18,7 +18,7 @@ export default async function ZoekenPage({ params, searchParams }: PageProps) {
 
   return (
     <div className="min-h-screen pt-16">
-      <div className="bg-bg-green border-b border-brand-primary/30 px-10 py-12">
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-12">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-extrabold tracking-[-1px] mb-6">Zoeken</h1>
           <form method="get" className="flex max-w-xl border-2 border-brand-accent/50">
@@ -36,10 +36,10 @@ export default async function ZoekenPage({ params, searchParams }: PageProps) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-10 py-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-8 md:py-10">
         {q && <p className="text-text-muted text-sm mb-6">{results.length} resultaten voor &quot;{q}&quot;</p>}
         {results.length > 0 ? (
-          <div className="grid grid-cols-4 gap-0.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-0.5">
             {results.map((product: { _id: string; naam: string; naamEn?: string; artikelnummer: string; slug: string; categorie: { naam: string; slug: string }; prijs: number; inVoorraad: boolean; afbeelding?: unknown }) => (
               <ProductCard
                 key={product._id}

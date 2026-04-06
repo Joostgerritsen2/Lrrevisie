@@ -12,11 +12,11 @@ export async function UspBar() {
   ]
 
   return (
-    <div className="bg-bg-green border-b border-brand-primary/30 grid grid-cols-4">
+    <div className="bg-bg-green border-b border-brand-primary/30 grid grid-cols-2 lg:grid-cols-4">
       {items.map((item, i) => (
         <div
           key={i}
-          className="flex items-center gap-3.5 px-6 py-5 border-r border-white/5 last:border-r-0"
+          className="flex items-center gap-3.5 px-5 lg:px-6 py-4 lg:py-5 border-r border-b border-white/5 last:border-r-0 odd:last:border-r lg:border-b-0 lg:odd:last:border-r-0"
         >
           <item.icon size={20} className="text-brand-accent flex-shrink-0" />
           <div>

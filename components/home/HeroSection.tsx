@@ -1,49 +1,66 @@
 'use client'
-import { ShoppingBag, BookOpen } from 'lucide-react'
+import { ShoppingBag, Wrench, ChevronDown } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+
+// Mixkit CC0 video — draaiende metalen tandwielen, past perfect bij een gearbox specialist
+const VIDEO_URL = 'https://assets.mixkit.co/videos/32653/32653-720.mp4'
+// Fallback poster: een LR Revisie product foto
+const POSTER_URL = 'https://lr-revisie.nl/wp-content/uploads/2022/09/2117686472-scaled.jpg'
 
 export function HeroSection({ locale }: { locale: string }) {
   const t = useTranslations('hero')
 
   return (
-    <section className="relative h-screen min-h-[640px] flex items-end overflow-hidden">
+    <section className="relative min-h-[600px] md:h-screen md:min-h-[700px] flex items-end overflow-hidden bg-bg-primary">
+
       {/* Video achtergrond */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        poster="https://lr-revisie.nl/wp-content/uploads/2023/01/FRC8382-scaled.jpg"
+        poster={POSTER_URL}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: 'brightness(0.3) saturate(0.6)' }}
+        style={{ filter: 'brightness(0.28) saturate(0.55) contrast(1.1)' }}
       >
-        <source src="/video/hero.mp4" type="video/mp4" />
+        <source src={VIDEO_URL} type="video/mp4" />
+        {/* Fallback: toon poster */}
       </video>
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/40 to-black/15 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/60 via-transparent to-transparent pointer-events-none" />
+      {/* Gelaagde gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/60 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/75 via-bg-primary/20 to-transparent pointer-events-none" />
 
-      {/* Accentlijn links */}
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-accent z-10" />
+      {/* Verticale accentlijn links */}
+      <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-brand-accent z-10" />
 
-      {/* Content */}
-      <div className="relative z-10 pb-20 pl-20 max-w-2xl">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="w-8 h-0.5 bg-brand-accent" />
-          <span className="text-xs font-bold tracking-[3px] uppercase text-brand-accent">
+      {/* Decoratieve rechterhoek — geeft diepte */}
+      <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-brand-accent/20 to-transparent" />
+
+      {/* Hoofdcontent */}
+      <div className="relative z-10 pb-16 md:pb-24 pl-8 md:pl-20 pr-6 max-w-2xl xl:max-w-3xl">
+        {/* Eyebrow */}
+        <div className="flex items-center gap-3 mb-5 md:mb-6">
+          <div className="w-6 md:w-10 h-[2px] bg-brand-accent" />
+          <span className="text-[10px] md:text-[11px] font-bold tracking-[4px] uppercase text-brand-accent">
             {t('eyebrow')}
           </span>
         </div>
-        <h1 className="text-[clamp(40px,5.5vw,68px)] font-extrabold leading-[1.05] tracking-[-2px] text-white mb-5">
+
+        {/* Headline */}
+        <h1 className="text-[clamp(34px,5.5vw,72px)] font-extrabold leading-[1.02] tracking-[-2px] text-white mb-5 md:mb-6">
           {t('headline')}
         </h1>
-        <p className="text-base leading-[1.75] text-text-muted mb-9 max-w-[480px]">
+
+        {/* Subtext */}
+        <p className="text-sm md:text-base leading-[1.8] text-white/55 mb-8 md:mb-10 max-w-[500px]">
           {t('subtext')}
         </p>
-        <div className="flex gap-3">
+
+        {/* CTA buttons */}
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button variant="primary" size="lg" asChild>
             <Link href={`/${locale}/winkel`}>
               <ShoppingBag size={16} />
@@ -51,35 +68,43 @@ export function HeroSection({ locale }: { locale: string }) {
             </Link>
           </Button>
           <Button variant="ghost" size="lg" asChild>
-            <Link href={`/${locale}/gidsen`}>
-              <BookOpen size={16} />
-              {t('cta_guides')}
+            <Link href={`/${locale}/over-ons`}>
+              <Wrench size={16} />
+              Over ons
             </Link>
           </Button>
         </div>
       </div>
 
-      {/* Stats rechtsonder IN de hero */}
+      {/* Stats blokken rechtsonder */}
       <div className="absolute bottom-0 right-0 flex z-10">
         {[
-          { num: '418', label: 'Onderdelen' },
-          { num: '30+', label: 'Jaar ervaring' },
-          { num: 'NL & BE', label: 'Levering' },
-        ].map(s => (
+          { num: '531',  label: 'Onderdelen' },
+          { num: '30+',  label: 'Jaar ervaring' },
+          { num: 'EU',   label: 'Verzending' },
+        ].map((s, i) => (
           <div
             key={s.num}
-            className="bg-bg-primary/85 backdrop-blur-sm border-l border-t border-brand-primary/40 px-7 py-5 text-center"
+            className={`
+              bg-bg-primary/90 backdrop-blur-sm
+              border-l border-t border-brand-primary/50
+              px-5 md:px-8 py-4 md:py-6 text-center
+              ${i === 2 ? '' : ''}
+            `}
           >
-            <div className="text-2xl font-extrabold text-brand-accent leading-none">{s.num}</div>
-            <div className="text-[10px] text-text-muted tracking-[1px] mt-1 uppercase">{s.label}</div>
+            <div className="text-xl md:text-3xl font-extrabold text-brand-accent leading-none tracking-[-1px]">
+              {s.num}
+            </div>
+            <div className="text-[9px] md:text-[10px] text-white/40 tracking-[1.5px] mt-1.5 uppercase font-medium">
+              {s.label}
+            </div>
           </div>
         ))}
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 right-16 flex flex-col items-center gap-2 z-10">
-        <div className="w-px h-12 bg-gradient-to-b from-brand-accent/80 to-transparent animate-pulse" />
-        <span className="text-[10px] tracking-[2px] uppercase text-white/30">Scroll</span>
+      <div className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-10 opacity-40">
+        <ChevronDown size={18} className="text-white animate-bounce" />
       </div>
     </section>
   )

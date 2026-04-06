@@ -13,7 +13,7 @@ export default async function WinkelPage({ params }: PageProps) {
   return (
     <div className="min-h-screen pt-16">
       {/* Header */}
-      <div className="bg-bg-green border-b border-brand-primary/30 px-10 py-12">
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-xs text-brand-accent tracking-[2px] uppercase mb-2">
             <a href={`/${locale}`} className="hover:text-white">Home</a> / Winkel
@@ -24,8 +24,8 @@ export default async function WinkelPage({ params }: PageProps) {
       </div>
 
       {/* Categorieën grid */}
-      <div className="max-w-7xl mx-auto px-10 py-14">
-        <div className="grid grid-cols-3 gap-0.5">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-10 md:py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5">
           {categories.map((cat: { _id: string; naam: string; naamEn?: string; slug: string; beschrijving?: string; beschrijvingEn?: string; afbeelding?: unknown; productCount: number }, i: number) => (
             <CategoryCard
               key={cat._id}
