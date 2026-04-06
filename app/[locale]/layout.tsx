@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { routing } from '@/i18n/routing'
 import '../globals.css'
-
-const locales = ['nl', 'en']
 
 export const metadata: Metadata = {
   title: { default: 'LR Revisie — Land Rover Specialist', template: '%s | LR Revisie' },
@@ -21,7 +20,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
 
-  if (!locales.includes(locale)) notFound()
+  if (!routing.locales.includes(locale as any)) notFound()
 
   const messages = await getMessages()
 
