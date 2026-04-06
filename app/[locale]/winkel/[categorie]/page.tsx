@@ -1,13 +1,15 @@
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
+import Link from 'next/link'
+import { ChevronRight } from 'lucide-react'
 import { sanityClient } from '@/lib/sanity/client'
 import { PRODUCTS_BY_CATEGORY_QUERY, ALL_CATEGORY_SLUGS_QUERY } from '@/lib/sanity/queries'
 import { ProductCard } from '@/components/shop/ProductCard'
-import { SortSelect } from '@/components/shop/SortSelect'
+import { ProductFilter } from '@/components/shop/ProductFilter'
 
 interface PageProps {
   params: Promise<{ locale: string; categorie: string }>
-  searchParams: Promise<{ sort?: string }>
+  searchParams: Promise<{ sort?: string; voorraad?: string; min?: string; max?: string }>
 }
 
 export async function generateStaticParams() {
@@ -20,58 +22,72 @@ export async function generateStaticParams() {
 
 export default async function CategoriePage({ params, searchParams }: PageProps) {
   const { locale, categorie } = await params
-  const { sort = 'naam' } = await searchParams
+  const { sort = 'naam', voorraad = 'all', min = '', max = '' } = await searchParams
 
   const products = await sanityClient.fetch(PRODUCTS_BY_CATEGORY_QUERY, { categorie })
+  if (!products || products.length === 0) notFound()
 
-  if (!products) notFound()
+  const catNaam = (products[0] as { categorie?: { naam: string } })?.categorie?.naam ?? categorie
 
-  // Sortering
-  const sorted = [...products].sort((a: { naam: string; prijs: number }, b: { naam: string; prijs: number }) => {
-    if (sort === 'prijs-asc') return a.prijs - b.prijs
+  // Filter + sortering
+  type Product = { _id: string; naam: string; naamEn?: string; artikelnummer: string; slug: string; categorie: { naam: string; slug: string }; prijs: number; salePrijs?: number; inVoorraad: boolean; afbeelding?: unknown }
+
+  let filtered: Product[] = [...products]
+  if (voorraad === 'op-voorraad') filtered = filtered.filter(p => p.inVoorraad)
+  if (min) filtered = filtered.filter(p => (p.prijs / 100) >= Number(min))
+  if (max) filtered = filtered.filter(p => (p.prijs / 100) <= Number(max))
+  filtered.sort((a, b) => {
+    if (sort === 'prijs-asc')  return a.prijs - b.prijs
     if (sort === 'prijs-desc') return b.prijs - a.prijs
     return a.naam.localeCompare(b.naam)
   })
 
-  const catNaam = (products[0] as { categorie?: { naam: string } })?.categorie?.naam ?? categorie
-
   return (
     <div className="min-h-screen pt-16">
       {/* Header */}
-      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-10 md:py-12">
+      <div className="bg-bg-green border-b border-brand-primary/30 px-5 md:px-10 py-8 md:py-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-xs text-brand-accent tracking-[2px] uppercase mb-2">
-            <a href={`/${locale}`}>Home</a> / <a href={`/${locale}/winkel`}>Winkel</a> / {catNaam}
+          <div className="flex items-center gap-1.5 text-xs text-text-subtle mb-3">
+            <Link href={`/${locale}`} className="hover:text-white transition-colors">Home</Link>
+            <ChevronRight size={11} className="text-white/20" />
+            <Link href={`/${locale}/winkel`} className="hover:text-white transition-colors">Winkel</Link>
+            <ChevronRight size={11} className="text-white/20" />
+            <span className="text-brand-accent">{catNaam}</span>
           </div>
-          <h1 className="text-4xl font-extrabold tracking-[-1px]">{catNaam}</h1>
-          <p className="text-text-muted mt-2">{products.length} producten</p>
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-1px]">{catNaam}</h1>
+          <p className="text-text-muted text-sm mt-1">{products.length} producten</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-5 md:px-10 py-8 md:py-10">
-        {/* SortSelect wrapped in Suspense (uses useSearchParams) */}
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-8">
         <Suspense fallback={null}>
-          <SortSelect current={sort} />
+          <ProductFilter total={products.length} filtered={filtered.length} />
         </Suspense>
 
-        {/* Productgrid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-0.5">
-          {sorted.map((product: { _id: string; naam: string; naamEn?: string; artikelnummer: string; slug: string; categorie: { naam: string; slug: string }; prijs: number; salePrijs?: number; inVoorraad: boolean; afbeelding?: unknown }) => (
-            <ProductCard
-              key={product._id}
-              id={product._id}
-              naam={locale === 'en' && product.naamEn ? product.naamEn : product.naam}
-              artikelnummer={product.artikelnummer}
-              slug={product.slug}
-              categorie={product.categorie}
-              prijs={product.prijs}
-              salePrijs={product.salePrijs}
-              inVoorraad={product.inVoorraad}
-              afbeelding={product.afbeelding as Parameters<typeof ProductCard>[0]['afbeelding']}
-              locale={locale}
-            />
-          ))}
-        </div>
+        {filtered.length === 0 ? (
+          <div className="py-16 text-center text-text-muted">
+            <p className="text-lg font-semibold mb-2">Geen producten gevonden</p>
+            <p className="text-sm">Pas de filters aan om meer resultaten te zien.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-0.5">
+            {filtered.map(product => (
+              <ProductCard
+                key={product._id}
+                id={product._id}
+                naam={locale === 'en' && product.naamEn ? product.naamEn : product.naam}
+                artikelnummer={product.artikelnummer}
+                slug={product.slug}
+                categorie={product.categorie}
+                prijs={product.prijs}
+                salePrijs={product.salePrijs}
+                inVoorraad={product.inVoorraad}
+                afbeelding={product.afbeelding as Parameters<typeof ProductCard>[0]['afbeelding']}
+                locale={locale}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

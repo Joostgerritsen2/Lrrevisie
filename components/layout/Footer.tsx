@@ -54,6 +54,8 @@ export async function Footer({ locale }: { locale: string }) {
           {/* Service */}
           <div>
             <h4 className="text-[10px] font-bold tracking-[2.5px] uppercase text-text-subtle mb-4 md:mb-5">{t('service')}</h4>
+            <Link href={`/${locale}/revisie-service`} className="block text-sm text-text-muted hover:text-white mb-2 transition-colors">Revisie service</Link>
+            <Link href={`/${locale}/offerte`} className="block text-sm text-text-muted hover:text-white mb-2 transition-colors">Offerte aanvragen</Link>
             <Link href={`/${locale}/verzending-retour`} className="block text-sm text-text-muted hover:text-white mb-2 transition-colors">Verzending &amp; retour</Link>
             <Link href={`/${locale}/algemene-voorwaarden`} className="block text-sm text-text-muted hover:text-white mb-2 transition-colors">Algemene voorwaarden</Link>
             <Link href={`/${locale}/privacy`} className="block text-sm text-text-muted hover:text-white mb-2 transition-colors">Privacybeleid</Link>

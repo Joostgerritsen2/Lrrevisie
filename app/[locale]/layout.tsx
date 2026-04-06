@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton'
 
 export const metadata: Metadata = {
   title: { default: 'LR Revisie — Land Rover Specialist', template: '%s | LR Revisie' },
@@ -30,6 +31,7 @@ export default async function LocaleLayout({
       <Nav locale={locale} />
       <main>{children}</main>
       <Footer locale={locale} />
+      <WhatsAppButton />
     </NextIntlClientProvider>
   )
 }
