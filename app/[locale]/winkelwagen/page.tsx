@@ -53,58 +53,50 @@ export default function WinkelwagenPage() {
           {/* Items */}
           <div className="lg:col-span-2 space-y-0.5">
             {items.map(item => (
-              <div key={item.id} className="flex gap-4 p-4 bg-bg-card border border-brand-primary/20">
+              <div key={item.id} className="flex gap-3 p-4 bg-bg-card border border-brand-primary/20">
                 {/* Afbeelding */}
-                <div className="w-20 h-20 flex-shrink-0 bg-bg-elevated border border-white/5 overflow-hidden">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-bg-elevated border border-white/5 overflow-hidden">
                   {item.afbeeldingUrl ? (
                     <Image src={item.afbeeldingUrl} alt={item.naam} width={80} height={80} className="w-full h-full object-contain" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <ShoppingBag size={20} className="text-white/10" />
+                      <ShoppingBag size={16} className="text-white/10" />
                     </div>
                   )}
                 </div>
 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <Link
-                    href={`/${locale}/winkel/${item.categorie}/${item.slug}`}
-                    className="text-sm font-semibold text-white hover:text-brand-accent transition-colors line-clamp-2 leading-tight mb-1"
-                  >
-                    {item.naam}
-                  </Link>
-                  <div className="text-xs font-mono text-text-subtle mb-3">{item.artikelnummer}</div>
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <Link
+                        href={`/${locale}/winkel/${item.categorie}/${item.slug}`}
+                        className="text-sm font-semibold text-white hover:text-brand-accent transition-colors line-clamp-2 leading-tight"
+                      >
+                        {item.naam}
+                      </Link>
+                      <div className="text-xs font-mono text-text-subtle mt-0.5">{item.artikelnummer}</div>
+                    </div>
+                    <button onClick={() => removeItem(item.id)} className="text-text-subtle hover:text-red-400 transition-colors p-0.5 flex-shrink-0">
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
 
-                  <div className="flex items-center justify-between flex-wrap gap-3">
+                  <div className="flex items-center gap-3 mt-3">
                     {/* Aantal */}
                     <div className="flex items-center border border-white/10">
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-8 h-8 flex items-center justify-center text-text-muted hover:text-white hover:bg-white/5 transition-colors"
-                      >
-                        <Minus size={12} />
+                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="w-7 h-7 flex items-center justify-center text-text-muted hover:text-white hover:bg-white/5 transition-colors">
+                        <Minus size={11} />
                       </button>
-                      <span className="w-10 text-center text-sm font-semibold">{item.quantity}</span>
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-8 h-8 flex items-center justify-center text-text-muted hover:text-white hover:bg-white/5 transition-colors"
-                      >
-                        <Plus size={12} />
+                      <span className="w-8 text-center text-sm font-semibold">{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="w-7 h-7 flex items-center justify-center text-text-muted hover:text-white hover:bg-white/5 transition-colors">
+                        <Plus size={11} />
                       </button>
                     </div>
-
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm font-extrabold text-brand-accent">{formatPrice(item.prijs * item.quantity)}</span>
-                      {item.quantity > 1 && (
-                        <span className="text-xs text-text-subtle">{formatPrice(item.prijs)} p/st</span>
-                      )}
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className="text-text-subtle hover:text-red-400 transition-colors p-1"
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
+                    <span className="text-sm font-extrabold text-brand-accent ml-auto">{formatPrice(item.prijs * item.quantity)}</span>
+                    {item.quantity > 1 && (
+                      <span className="text-xs text-text-subtle hidden sm:inline">{formatPrice(item.prijs)} p/st</span>
+                    )}
                   </div>
                 </div>
               </div>

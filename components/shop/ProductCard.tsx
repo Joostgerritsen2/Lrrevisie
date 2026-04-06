@@ -72,10 +72,10 @@ export function ProductCard({ id, naam, artikelnummer, slug, categorie, prijs, s
           {inVoorraad && (
             <button
               onClick={handleAdd}
-              className="flex items-center gap-1.5 bg-brand-primary border border-brand-accent px-3 py-1.5 text-xs font-bold hover:bg-brand-accent transition-colors"
+              className="flex items-center gap-1.5 bg-brand-primary border border-brand-accent px-2.5 py-1.5 text-xs font-bold hover:bg-brand-accent transition-colors flex-shrink-0"
             >
               <ShoppingCart size={12} />
-              {t('add_to_cart')}
+              <span className="hidden sm:inline">{t('add_to_cart')}</span>
             </button>
           )}
         </div>

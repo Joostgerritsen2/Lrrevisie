@@ -123,25 +123,26 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* ─── Zoekbalk CTA ──────────────────────────────────────────── */}
       <section className="bg-gradient-to-br from-bg-deep-green via-brand-dark to-brand-primary py-12 md:py-16 px-5 md:px-10 border-t-2 border-brand-accent relative overflow-hidden">
-        {/* Decoratief patroon */}
-        <div className="absolute inset-0 opacity-3">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-accent rounded-full -translate-y-1/2 translate-x-1/2" />
-        </div>
         <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-16">
           <div>
             <h2 className="text-xl md:text-2xl font-extrabold tracking-[-0.5px] mb-1.5">Weet je het artikelnummer al?</h2>
             <p className="text-sm text-white/55">Zoek direct op OEM-nummer, naam of omschrijving</p>
           </div>
-          <Link href={`/${locale}/zoeken`}
-            className="flex w-full md:flex-1 md:max-w-[520px] border-2 border-white/20 bg-black/20 hover:border-white/35 transition-colors group">
-            <span className="flex-1 px-5 py-4 text-sm text-white/30">
-              Bijv. FRC1780, RTC7158 of &apos;output shaft seal&apos;…
-            </span>
-            <span className="flex items-center gap-2 bg-brand-accent/20 border-l-2 border-white/20 px-6 py-4 text-sm font-bold tracking-widest group-hover:bg-brand-accent/30 transition-colors">
+          <form action={`/${locale}/zoeken`} method="GET"
+            className="flex w-full md:flex-1 md:max-w-[520px] border-2 border-white/20 bg-black/20 focus-within:border-white/40 transition-colors">
+            <input
+              type="text"
+              name="q"
+              placeholder="Bijv. FRC1780, RTC7158 of 'output shaft seal'…"
+              autoComplete="off"
+              className="flex-1 px-5 py-4 text-sm text-white bg-transparent placeholder-white/30 outline-none"
+            />
+            <button type="submit"
+              className="flex items-center gap-2 bg-brand-accent/20 border-l-2 border-white/20 px-5 md:px-6 py-4 text-sm font-bold tracking-widest hover:bg-brand-accent/40 transition-colors flex-shrink-0">
               <Search size={15} />
-              ZOEK
-            </span>
-          </Link>
+              <span className="hidden sm:inline">ZOEK</span>
+            </button>
+          </form>
         </div>
       </section>
 
